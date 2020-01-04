@@ -13,7 +13,6 @@
 readme.md <- function(path = ".", env = env_package(path)) {
   objs   <- parse_package(path, env)
   readme <- NULL
-  browser()
   for (obj in objs) {
     tags <- sapply(obj[[1]], function(elem) {elem$tag})
     #

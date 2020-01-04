@@ -15,7 +15,7 @@ demoApp(topic = NULL, package = "gettext")
 nothing
 }
 \description{
-Runs one (or more examples) Shiny apps a package. With \code{demoApp(package="gettext")} 
+Runs one Shiny demo app of a package. With \code{demoApp(package="gettext")} 
 you get a vector of topics back of the package \code{gettext}.
 }
 \examples{
