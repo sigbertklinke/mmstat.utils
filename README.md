@@ -1,6 +1,6 @@
 # demoApp #
 
-Runs one (or more examples) Shiny apps a package. With `demoApp(package="gettext")` 
+Runs one Shiny demo app of a package. With `demoApp(package="gettext")` 
 you get a vector of topics back of the package `gettext`.
 
 ```r
