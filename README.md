@@ -20,5 +20,5 @@ dsub('$a EUR', list(a=3))
 
 # readme.md #
 
-Creates lines for a README.md for Github based on roxygen2 comments using `[roxygen2::parse_package](https://cran.r-project.org/web/packages/roxygen2/roxygen2.pdf)`.
+Creates lines for a README.md for Github based on roxygen2 comments using [`roxygen2::parse_package`](https://cran.r-project.org/web/packages/roxygen2/roxygen2.pdf).
 

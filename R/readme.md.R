@@ -15,6 +15,7 @@ readme.md <- function(path = ".", env = env_package(path)) {
     txt <- paste0(txt, collapse="\n")
     # 
     txt <- str_replace_all(unlist(txt), regex("\\\\dontrun\\s*\\{.*?\\}", dotall=TRUE), "")
+    txt <- str_replace_all(unlist(txt), "\\\\code\\{\\\\link\\s*\\[(.*?)\\]\\s*\\{(.*?)\\}\\}", "[`\\1::\\2`](https://cran.r-project.org/web/packages/\\1/\\1.pdf)")
     txt <- str_replace_all(unlist(txt), "\\\\link\\s*\\[(.*?)\\]\\s*\\{(.*?)\\}", "[\\1::\\2](https://cran.r-project.org/web/packages/\\1/\\1.pdf)")
     txt <- str_replace_all(unlist(txt), "\\\\code\\s*\\{(.*?)\\}", "`\\1`")
     unlist(str_split(unlist(txt), fixed("\n")))
