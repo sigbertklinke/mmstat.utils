@@ -22,5 +22,5 @@ find the code object associated with each block.}
 strings with markdown code
 }
 \description{
-Creates a README.md for Github based on roxygen2 comments and uses \code{\link[roxygen2]{parse_package}}.
+Creates a lines for a README.md for Github based on roxygen2 comments and uses \code{\link[roxygen2]{parse_package}}.
 }

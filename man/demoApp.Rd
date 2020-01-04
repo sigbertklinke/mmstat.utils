@@ -4,24 +4,23 @@
 \alias{demoApp}
 \title{demoApp}
 \usage{
-demoApp(topic = NULL, package = "gettext")
+demoApp(topic)
 }
 \arguments{
-\item{topic}{character: example(s) to show or \code{NULL}}
-
-\item{package}{character: package to use (default: \code{"gettext"})}
+\item{topic}{character: example app to run}
 }
 \value{
 nothing
 }
 \description{
-Runs one Shiny demo app of a package. With \code{demoApp(package="gettext")} 
-you get a vector of topics back of the package \code{gettext}.
+Runs a Shiny demo app or shows an overview of all Shiny demo apps related to \code{topic}. 
+If more than one app relates to \code{topic} a list of apps is shown otherwise the app is run.
 }
 \examples{
-demoApp(package='gettext') 
+demoApp() 
+demoApp('gettext') 
 \dontrun{
-  demoApp('app2en', 'gettext') 
-  demoApp('app2de', 'gettext') 
+  demoApp('gettext::app2en') 
+  demoApp('app2de') 
 }
 }

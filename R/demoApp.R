@@ -1,27 +1,43 @@
 #' demoApp
 #'
-#' Runs one Shiny demo app of a package. With \code{demoApp(package="gettext")} 
-#' you get a vector of topics back of the package \code{gettext}.
+#' Runs a Shiny demo app or shows an overview of all Shiny demo apps related to \code{topic}. 
+#' If more than one app relates to \code{topic} a list of apps is shown otherwise the app is run.
 #'
-#' @param topic character: example(s) to show or \code{NULL}
-#' @param package character: package to use (default: \code{"gettext"})
+#' @param topic character: example app to run
 #'
 #' @return nothing
 #' @export
 #'
 #' @examples
-#' demoApp(package='gettext') 
+#' demoApp() 
+#' demoApp('gettext') 
 #' \dontrun{
-#'   demoApp('app2en', 'gettext') 
-#'   demoApp('app2de', 'gettext') 
+#'   demoApp('gettext::app2en') 
+#'   demoApp('app2de') 
 #' }
-demoApp <- function(topic=NULL, package='gettext') {
-  if (is.null(topic)) {
-    files <- list.files(path=system.file('shiny', package=package), pattern="*.R")
-    files <- strsplit(basename(files), '.R')
-    return(sapply(files, '[[', 1))
+demoApp <- function(topic) {
+  # collect all apps
+  spkg  <- file.path(find.package(), "shiny")
+  spkg  <- spkg[dir.exists(spkg)]
+  files <- list.files(spkg, '*.R', full.names = TRUE)
+  sfile <- strsplit(files, '/', fixed=TRUE)
+  loa   <- data.frame(pkg  =sapply(sfile, function(e) { e[length(e)-2]}),  
+                      topic=sapply(sfile, function(e) { strsplit(e[length(e)], '.R', fixed=TRUE)[[1]] }),
+                      file =files, stringsAsFactors = FALSE)
+  index <- 1:nrow(loa)
+  if (!missing(topic)) {
+    index <- numeric(0)
+    ts <- strsplit(topic, '::', fixed=TRUE)        
+    for (tsi in ts) {
+      if (length(tsi)==1) index <- c(index, which((loa$pkg==tsi[1]) | (loa$topic==tsi[1])))
+      if (length(tsi)==2) index <- c(index, which((loa$pkg==tsi[1]) & (loa$topic==tsi[2])))
+    }
+    index <- sort(unique(index))
   }
-  if (length(topic)>1) stop("More than one topic given")
-  file <- paste0(system.file('shiny', package=package), '/', topic[1], '.R')
-  source(file)
+  if (length(index)!=1) {
+    loa$topic <- paste(loa$pkg, loa$topic, sep="::")
+    loa$pkg   <- NULL
+    return(loa)
+  }
+  source(loa$file[index])
 }

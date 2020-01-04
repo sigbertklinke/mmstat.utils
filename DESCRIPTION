@@ -5,8 +5,8 @@ Authors@R:
   c(person("Sigbert", "Klinke", email="sigbert@hu-berlin.de", role=c("aut", "cre")))
 Description: A set of utility routines for MM*Stat.
 Imports:
-  roxygen2,
-  roxygen2md
+  stringr,
+  roxygen2
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
